@@ -12,8 +12,9 @@ class ArticleParser(object):
     def __init__(self, root_url: str):
         self.root_url: str = root_url
         self.url = urlparse(root_url)
+        self.title = ""
 
-    def get_article_body(self) -> str:
+    def get_article_body(self) -> dict:
         try:
             url: str = self.root_url
             contents: list[str] = []
@@ -26,6 +27,9 @@ class ArticleParser(object):
                 )
                 contents.append(article_body)
 
+                if not self.title:
+                    self.title = soup.find("article").find("h1").get_text(strip=True)
+    
                 next_anchor = soup.find(
                     "a", attrs={ANCHOR_PROPS_KEY: ANCHOR_PROPS_VALUE}
                 )
@@ -34,6 +38,6 @@ class ArticleParser(object):
                     url = self.url._replace(path=next_anchor.get("href")).geturl()
                 else:
                     break
-            return "\n".join(contents)
+            return {"title": self.title, "body": "\n".join(contents)}
         except:
-            return "記事を取得できませんでした"
+            return {}
