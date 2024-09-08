@@ -12,6 +12,7 @@ client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 # テキスト入力
 url = st.text_input("URLを入力してください")
+article = ArticleParser(url).get_article_body()
 
 # ボタン
 if st.button("ポジティブ化する"):
@@ -23,7 +24,7 @@ if st.button("ポジティブ化する"):
     role="あなたはプロの心理カウンセラーです。\n"
     prompt = f'''記事の内容をポジティブにしてください。過激な表現やグロテスクな表現は避けてください。Let's think step by step.
 ## 記事
-{ArticleParser(url).get_article_body()}
+{article}
 '''
     response = client.chat.completions.create(
         model=model_name,
