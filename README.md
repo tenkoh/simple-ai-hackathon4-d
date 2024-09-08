@@ -53,3 +53,35 @@ make run
 
 - **install**: requirements.txt を使って依存関係をインストールします。
 - **run**: Streamlit アプリケーションを実行します。
+
+## Cloud Run へのデプロイ
+
+以下の手順で Cloud Run へデプロイできます
+
+- デプロイ先のプロジェクトへログインします
+
+```sh
+gcloud auth login
+gcloud config set project <your-project-id>
+```
+
+- 利用するサービスを有効化します
+
+```sh
+gcloud services enable compute.googleapis.com run.googleapis.com \
+    artifactregistry.googleapis.com cloudbuild.googleapis.com
+```
+
+有効化されるサービスは以下のとおりです。
+
+`compute.googleapis.com` ▶︎ Compute Engine、仮想マシンが利用できます。
+`run.googleapis.com` ▶︎ Cloud Run、コンテナアプリをホスト。
+`artifactregistry.googleapis.com` ▶︎ Artifact Registry、Docker イメージ の保存。
+`cloudbuild.googleapis.com` ▶︎ Cloud Build、サーバーレスな CI 環境です。
+
+- 以下のコマンドを実行すると Cloud Run へデプロイされます
+
+```sh
+gcloud run deploy my-app --region "asia-northeast1" --source . \
+    --allow-unauthenticated --quiet --update-env-vars OPENAI_API_KEY=<OPENAI_API_KEY>
+```
