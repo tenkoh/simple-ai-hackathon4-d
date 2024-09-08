@@ -9,6 +9,7 @@ from article import ArticleParser
 load_dotenv()
 
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+st.set_page_config(layout="wide")
 
 # テキスト入力
 url = st.text_input("URLを入力してください")
