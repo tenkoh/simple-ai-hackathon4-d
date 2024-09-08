@@ -12,7 +12,8 @@ client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 # テキスト入力
 url = st.text_input("URLを入力してください")
-article = ArticleParser(url).get_article_body()
+parser = ArticleParser(url)
+article = parser.get_article_body()
 
 # 言語を選ばせたい
 language = st.selectbox(
@@ -37,10 +38,7 @@ if st.button("ポジティブ化する💖"):
     例えば、以下の様に過激な表現やグロテスクな表現は柔らかい表現に変更して下さい。
     ・「殺す」は「天国へ導いた」
     【手順4】
-    見出しを「💗ポジティブ化したニュース💗」として、マークダウンの表示にしてください。
-    見出しの次の行は「以下の内容をポジティブに変換しました～✨」と書いてください。
-    その次の行で、「{url}」を出力してください。コードブロックにして、簡単にコピーできるようにしてください。
-    その下に、ポジティブ化したニュースを出力してください。
+    見出しは作らずにポジティブ化したニュースをプレーンテキストで出力してください。
     【手順4】
     出力言語は{language}にしてください。
     【手順5】
@@ -53,14 +51,27 @@ if st.button("ポジティブ化する💖"):
 {article}
 """
 
-    # API叩く
-    response = client.chat.completions.create(
-        model=model_name,
-        messages=[
-            {"role": "system", "content": role},
-            {"role": "user", "content": prompt},
-        ],
-    )
+    response = ""
+    with st.balloons():
+        # API叩く
+        response = client.chat.completions.create(
+            model=model_name,
+            messages=[
+                {"role": "system", "content": role},
+                {"role": "user", "content": prompt},
+            ],
+        )
+    result = response.choices[0].message.content.strip()
 
-    # 出力
-    st.write(response.choices[0].message.content.strip())
+    # 2つの列を作成
+    col1, col2 = st.columns(2)
+
+    # 左側の列に表示する内容
+    with col1:
+        st.header("原文")
+        st.markdown(article)
+
+    # 右側の列に表示する内容
+    with col2:
+        st.header("💗ポジティブ化したニュース💗")
+        st.markdown(result)
