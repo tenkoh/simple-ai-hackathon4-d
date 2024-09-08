@@ -43,10 +43,11 @@ def get_article_body(url):
         
         # 'article_body'クラスを持つdiv要素を検索
         article_body = soup.find('div', class_='article_body')
+
         
         if article_body:
             # div要素の内容を返す
-            return article_body.get_text(strip=True)
+            return article_body.get_text(separator= "\n\n", strip=True)
         else:
             return "Article body not found."
     else:
@@ -69,7 +70,7 @@ if st.button("ポジティブ化する"):
 
     
     role="あなたはプロの心理カウンセラーです。\n"
-    prompt = f'''記事の内容をポジティブにしてください。過激な表現やグロテスクな表現は避けてください。Let's think step by step.
+    prompt = f'''記事の内容をポジティブにしてください。過激な表現やグロテスクな表現は避けてください。見出しなどを付けずに修正後の文章のみ出力してください。Let's think step by step.
 ## 記事
 {original}
 '''
@@ -91,9 +92,9 @@ if st.button("ポジティブ化する"):
     # 左側の列に表示する内容
     with col1:
         st.header("原文")
-        st.write(original)
+        st.markdown(original)
 
     # 右側の列に表示する内容
     with col2:
         st.header("ポジティブ")
-        st.write(result)
+        st.markdown(result)
