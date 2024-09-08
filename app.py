@@ -13,8 +13,6 @@ st.set_page_config(layout="wide")
 
 # テキスト入力
 url = st.text_input("URLを入力してください")
-parser = ArticleParser(url)
-article = parser.get_article_body()
 
 # 言語を選ばせたい
 language = st.selectbox(
@@ -24,6 +22,9 @@ language = st.selectbox(
 
 # ポジティブボタン押下処理
 if st.button("ポジティブ化する💖"):
+    parser = ArticleParser(url)
+    article = parser.get_article_body()
+
     # 　GPTへ渡す情報
     model_name = "gpt-4o-mini"
     role = "あなたはプロの心理カウンセラーです。\n"
@@ -49,7 +50,7 @@ if st.button("ポジティブ化する💖"):
     【手順7】
     最後に注意点です。{language}に直して表示してください。
 ## 記事
-{article}
+{article["body"]}
 """
 
     response = ""
@@ -64,13 +65,16 @@ if st.button("ポジティブ化する💖"):
         )
     result = response.choices[0].message.content.strip()
 
+    st.header("記事タイトル")
+    st.write(article["title"])
+
     # 2つの列を作成
     col1, col2 = st.columns(2)
 
     # 左側の列に表示する内容
     with col1:
         st.header("原文")
-        st.markdown(article)
+        st.markdown(article["body"])
 
     # 右側の列に表示する内容
     with col2:
