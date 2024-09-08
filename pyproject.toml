@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "simple-ai-hackathon4-d"
+version = "0.1.0"
+description = ""
+authors = ["sakuyacatcat <shingo.takagi0116@gmail.com>"]
+readme = "README.md"
+packages = [{include = "simple_ai_hackathon4_d"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+streamlit = "^1.38.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
