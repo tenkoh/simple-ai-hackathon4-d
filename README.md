@@ -5,7 +5,6 @@
 ## 前提条件
 
 - Python 3.7 以上
-- Poetry（依存関係の管理に使用）
 
 ## セットアップ
 
@@ -23,7 +22,7 @@
    make install
    ```
 
-   これにより、Poetry を使って必要な依存関係がインストールされます。
+   これにより、requirements.txt を使って必要な依存関係がインストールされます。
 
 ## アプリケーションの実行
 
@@ -37,5 +36,5 @@ make run
 
 ## Makefile コマンド
 
-- **install**: Poetry を使って依存関係をインストールします。
+- **install**: requirements.txt を使って依存関係をインストールします。
 - **run**: Streamlit アプリケーションを実行します。
