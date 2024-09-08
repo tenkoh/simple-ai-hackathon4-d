@@ -24,6 +24,21 @@
 
    これにより、requirements.txt を使って必要な依存関係がインストールされます。
 
+3. **API キーの設定**:
+   このプロジェクトでは、[OpenAI](https://platform.openai.com/) の API キーが必要です。API キーを取得して、`.env` ファイルに設定してください。
+
+   ```bash
+   cp .env.example .env
+   ```
+
+   `.env` ファイルを開いて、`OPENAI_API_KEY` の値を設定してください。
+
+   ```bash
+   OPENAI_API_KEY=<APIキー>
+   ```
+
+   これで、API キーが設定されました。
+
 ## アプリケーションの実行
 
 アプリケーションを `http://localhost:8501` で実行するには、以下のコマンドを使用します。
