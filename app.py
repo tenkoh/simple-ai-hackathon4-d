@@ -51,14 +51,16 @@ if st.button("ポジティブ化する💖"):
 {article}
 """
 
-    # API叩く
-    response = client.chat.completions.create(
-        model=model_name,
-        messages=[
-            {"role": "system", "content": role},
-            {"role": "user", "content": prompt},
-        ],
-    )
+    response = ""
+    with st.balloons():
+        # API叩く
+        response = client.chat.completions.create(
+            model=model_name,
+            messages=[
+                {"role": "system", "content": role},
+                {"role": "user", "content": prompt},
+            ],
+        )
     result = response.choices[0].message.content.strip()
 
     # 2つの列を作成
@@ -71,5 +73,5 @@ if st.button("ポジティブ化する💖"):
 
     # 右側の列に表示する内容
     with col2:
-        st.header("💗ポジティブ化したニュースブブ💗")
+        st.header("💗ポジティブ化したニュース💗")
         st.markdown(result)
