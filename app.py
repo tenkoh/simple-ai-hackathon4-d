@@ -38,7 +38,7 @@ if st.button("ポジティブ化する"):
     st.write(url, "をポジティブ化します。")
 
     # URL
-    model_name = "gpt-4"
+    model_name = "gpt-4o-mini"
 
     role="あなたはプロの心理カウンセラーです。\n"
     prompt = f'''記事の内容をポジティブにしてください。過激な表現やグロテスクな表現は避けてください。Let's think step by step.
