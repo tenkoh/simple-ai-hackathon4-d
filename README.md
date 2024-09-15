@@ -1,12 +1,24 @@
 # simple-ai-hackathon4-d
+このプロジェクトはシンプルな生成AIハッカソン#4において、チームDが作成したアプリケーションです。
+著作権は以下のチームメンバー5人に帰属します。
 
-このプロジェクトは [Streamlit](https://streamlit.io/) を使って構築された Web アプリケーションで、依存関係管理には [Poetry](https://python-poetry.org/) を使用しています。Makefile を使って、インストールと実行が簡単にできるようになっています。
+- inuatsu
+- kasahara1225
+- sakuyacatcat
+- tenkoh
+- tomonarimomoka
+
+
+## 技術スタック
+- OpenAI API
+- [Streamlit](https://streamlit.io/)
 
 ## 前提条件
-
 - Python 3.7 以上
+- OpenAI API Key を発行済み
 
 ## セットアップ
+Makefile を使って、インストールと実行が簡単にできるようになっています。
 
 1. **リポジトリをクローン**:
 
